@@ -1,0 +1,18 @@
+DBRJS初始化成功的时候不打印Log                                                                 √
+TimeOut设置为1执行同步read操作返回RecognitionTimeout
+TimeOut设置为1执行异步read操作返回RecognitionTimeout
+DBRModule可成功初始化                                                                          √
+18625被占用状态下会自动切换到备用端口18993
+18626被占用状态下会自动切换到备用端口18994
+本地没有下载DBRModule的情况下初始化DBRModule会自动执行下载操作                                 √
+初始化DBRModule过程中当链接次数=1的时候开始执行下载操作                                        √
+当链接DBRModule的循环次数超过20的时候报错ConnectDBRModuleFailed
+dynamsoft.dbrEnv.versionInfo 在init完成前返回JS  version: 5.2.0.0930, Dll version:null         √
+dynamsoft.dbrEnv.versionInfo 在init完成后返回JS  version: 5.2.0.0930, Dll version:5.1.0.404    √
+ReadResult的内部属性totalTime正确返回自进入read*接口至返回结果的时间
+ReadResult的内部属性readTime正确返回后台执行ReadBarcode的时间
+新增加Enum env.EnumDBRErrorCode确认和NET的映射正常工作
+Service下载安装成功之后在不手动关闭下载弹框的情况下界面会重新出现downloading gif的图片
+手动关闭Dynamsoft Service的下载弹框后不会出现downloading的gif图片                              √
+链接DBR Module的过程会出现downloading gif的图片                                                √
+进入Init接口链接DWAS的过程直接开始出现downloading的gif图片                                     √

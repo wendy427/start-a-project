@@ -1,0 +1,296 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<div>
+		<button onclick="dynamsoft.dbrEnv.init(function(_data, statusStr, wrapedXhr){myLog('init success');myLog(_data.result[0]+' '+_data.result[1]);},function(errorCode,errorString){myLog('errorCode='+errorCode+',errorString='+errorString);})">init</button>
+		<button style="color:red" id="errorString" onclick="setInterval(function(){document.getElementById('errorString').innerHTML=reader.errorStr;},1000);">click to detect errorString</button>
+		<hr>
+		<button onclick="addPage()">AddPage</button>
+		<button onclick="clearAllPages()">ClearAllPage</button><hr>
+		<label for="iLeft">Left:</label>
+		<input style="width:50px" id="iLeft">
+		<label for="iTop">Top:</label>
+		<input style="width:50px" id="iTop">
+		<label for="iRight">Right:</label>
+		<input style="width:50px" id="iRight">
+		<label for="iBottom">Bottom:</label>
+		<input style="width:50px" id="iBottom">
+		<label for="ifByPercentage">IfByPercentage:</label>
+		<select id="ifByPercentage">
+				<option value ="true">True</option>
+				<option value ="false">False</option>
+		</select>
+		<button onclick="addRegion()">AddRegion</button><br>
+		<label for="regionSide">ScanRegionSide:</label>
+		<select id="regionSide">
+				<option value ="0">Left</option>
+				<option value ="1">Top</option>
+				<option value ="2">Right</option>
+				<option value ="3">Bottom</option>
+		</select>
+		<label for="iPercentage">iPercentage:</label>
+		<input style="width:100px" id="iPercentage">
+		<button onclick="addRegion2()">AddRegion2</button><br>
+		<button onclick="clearAllRegions()">ClearAllRegions</button><hr>
+		<label for="iFromAngle">iFromAngle:</label>
+		<input style="width:50px" id="iFromAngle">
+		<label for="iToAngle">iToAngle:</label>
+		<input style="width:50px" id="iToAngle">
+		<button onclick="addAngleRange()">AddAngleRange</button><br>
+		<select id="angleRange">
+				<option value ="0">EBOT_Horizontal</option>
+				<option value ="1">EBOT_Vertical</option>
+		</select>
+		<button onclick="addAngle()">AddAngle</button><br>
+		<button onclick="clearAngleRange()">ClearAngleRange</button><hr>
+		<label for="barcodeFormat">Format:</label>
+		<select id="barcodeFormat">
+				<option value ="0">EBF_All</option>
+				<option value ="1023">EBF_OneD</option>
+				<option value ="1">EBF_CODE_39</option>
+				<option value ="2">EBF_CODE_128</option>
+				<option value ="4">EBF_CODE_93</option>
+				<option value ="8">EBF_CODABAR</option>
+				<option value ="16">EBF_ITF</option>
+				<option value ="32">EBF_EAN_13</option>
+				<option value ="64">EBF_EAN_8</option>
+				<option value ="128">EBF_UPC_A</option>
+				<option value ="256">EBF_UPC_E</option>
+				<option value ="512">EBF_INDUSTRIAL_25</option>
+				<option value ="33554432">EBF_PDF417</option>
+				<option value ="67108864">EBF_QR_CODE</option>
+				<option value ="134217728">EBF_DATAMATRIX</option>
+				<option value ="test">-1</option>
+				
+		</select>
+		<label for="maxnum">MaxNum:</label>
+		<input style="width:50px" id="maxnum" value="100"><br>
+		<label for="ifDeblur">IfDeblur:</label>
+		<select id="ifDeblur">
+				<option value="true">true</option>
+				<option value="false">false</option>
+				<option value ="test">testError</option>
+		</select>
+		<label for="timeout">Timeout:</label>
+		<input style="width:50px" id="timeout" value="10000"><br>
+		<label for="colorMode">ColorMode:</label>
+		<select id="colorMode">
+				<option value ="0">EBCM_DarkOnLight</option>
+				<option value ="1">EBCM_LightOnDark </option>
+				<option value ="2">EBCM_DarkAndLight</option>
+				<option value ="test">testError</option>
+		</select>
+		<label for="imageCaptureDevice">ImageCaptureDevice:</label>
+		<select id="imageCaptureDevice">
+				<option value ="0">EICD_Unknown</option>
+				<option value ="1">EICD_Scanner </option>
+				<option value ="2">EICD_Camera</option>
+				<option value ="3">EICD_Fax</option>
+				<option value ="test">testError</option>
+		</select>
+		<label for="barcodeTextEncoding">BarcodeTextEncoding:</label>
+		<select id="barcodeTextEncoding">
+				<option value ="0">EBTE_Default</option>
+				<option value ="932">EBTE_SHIFT_JIS_932 </option>
+				<option value ="936">EBTE_GB2312_936</option>
+				<option value ="949">EBTE_Korean_949</option>
+				<option value ="950">EBTE_BIG5_950</option>
+				<option value ="1200">EBTE_UTF16</option>
+				<option value ="1201">EBTE_UTF16BE</option>
+				<option value ="65001">EBTE_UTF8</option>
+				<option value ="test">testError</option>
+				
+		</select>
+		<button onclick="setOption()">SetReader</button><hr>
+		<input id='file' type='file'>
+		<button onclick="readBinary()">readBinary</button>
+		<button onclick="readBinaryAsync()">readBinaryAsync</button><hr>
+		<input style="width:500px" id="url">
+		<button onclick="readURL()">readURL</button>
+		<button onclick="readURLAsync()">readURLAsync</button><hr>
+		<button onclick="readURLAsync2()">readURLAsync2</button><hr>
+		<textArea style="width:500px" id="base64"></textArea>
+		<button onclick="readBase64()">readBase64</button>
+		<button onclick="readBase64Async()">readBase64Async</button><hr>
+		<button>null</button><hr>
+		<div id="logDiv" style="height:500px;overflow-y:auto;word-break:break-all;word-wrap:break-word;"></div>
+	</div>
+	<script src="DBRResources/dynamsoft.barcodereader.config.js"></script>
+	<script src="DBRResources/dynamsoft.barcodereader.initiate.js"></script>
+	<script>
+		var lib = dynamsoft.lib;
+		var env = dynamsoft.dbrEnv;
+		var reader = new env.BarcodeReader();
+		var arrPages=[];
+	
+		function addPage(){
+			var pages = (document.getElementById("pageIndex").value);	
+			var arr = pages.split(',');
+			for(var i=0; i<arr.length;++i){
+				arr[i]=parseInt(arr[i]);
+			}
+			//arrPages.push(pages);
+			try{
+				reader.addPages(arr);
+			}catch(e){
+				myLog(e);
+			}
+			
+		}
+		 
+		function addRegion(){
+		var iLeft = parseInt(document.getElementById("iLeft").value);
+		var iTop = parseInt(document.getElementById("iTop").value);
+		var iRight = parseInt(document.getElementById("iRight").value);
+		var iBottom = parseInt(document.getElementById("iBottom").value);
+		var ifByPercentage=(document.getElementById("ifByPercentage").value==="true");
+		reader.addRegion(iLeft,iTop,iRight,iBottom,ifByPercentage);
+		}
+		
+		function addRegion2(){
+			var emside=parseInt(document.getElementById("regionSide").value);
+			var iPercentage = parseInt(document.getElementById("iPercentage").value);
+			reader.addRegion(emside,iPercentage);
+			
+		}
+		function clearAllRegions(){
+			reader.clearAllRegions();
+		}
+		
+		function addAngleRange(){
+			var iFromAngle = parseInt(document.getElementById("iFromAngle").value);
+			var iToAngle = parseInt(document.getElementById("iToAngle").value);
+			reader.addAngleRange(iFromAngle, iToAngle);
+		}
+		
+		function addAngle(){
+			var orientationType=parseInt(document.getElementById("angleRange").value);
+			reader.addAngle(orientationType);
+		}
+		function clearAngleRange(){
+			reader.clearAllAngles();
+		}
+		function setOption(){
+			reader.maxBarcodesNumPerPage=parseInt(document.getElementById("maxnum").value);
+			var format=document.getElementById("barcodeFormat").value;
+			reader.barcodeFormats=parseInt(format);
+			reader.useOneDDeblur= (document.getElementById("ifDeblur").value==="true");
+			reader.timeoutPerPage=parseInt(document.getElementById("timeout").value);
+			reader.imageCaptureDevice=parseInt(document.getElementById("imageCaptureDevice").value);
+			reader.barcodeColorMode=parseInt(document.getElementById("colorMode").value);
+			reader.barcodeTextEncoding=parseInt(document.getElementById("barcodeTextEncoding").value);
+
+		}
+		
+		
+		function clearAllPages(){
+		reader.clearAllPages();
+		}
+
+		function myLog(mess){
+			var timeStamp = document.createElement("p");
+			timeStamp.innerText = new Date();
+			var pre = document.createElement("pre");
+			pre.innerText = mess;
+			var logDiv = document.getElementById("logDiv");
+			logDiv.appendChild(timeStamp).appendChild(pre).appendChild(document.createElement("br"));
+			logDiv.scrollTop = logDiv.scrollHeight;
+		}
+		function logResult(result){
+			if(!result){
+				myLog('result not exist. error:'+reader.getErrorString());
+				return;
+			}
+			var arr=[];
+			for(var i=0;i<result.length;++i){
+				arr.push('"'+result[i].text+'"');
+			}
+			myLog("number: "+result.getCount()+"\nerrorString: "+reader.getErrorString()+"\ninfo: ["+arr.join(",")+"]");
+		}
+		document.getElementById("url").value = "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1522775964,3759712494&fm=23&gp=0.jpg";
+		function readBinary(){
+			var file = document.getElementById("file").files[0];
+			var result = reader.readBinary(file);
+			logResult(result);
+		}
+		function readBinaryAsync(){
+			var file = document.getElementById("file").files[0];
+			reader.readBinaryAsync(
+				file,
+				new Date(), 
+				function(userData, result){
+					logResult(result);
+				}, 
+				function(){
+					myLog("err");
+				}
+			);
+		}
+		function readURL(){
+			var url = document.getElementById("url").value;
+			var result = reader.readURL(url);
+			logResult(result);
+		}
+		function readURLAsync(){
+			var url = document.getElementById("url").value;
+			reader.readURLAsync(
+				url,
+				new Date(), 
+			    function(userData, result){
+					logResult(result);
+				}, 
+				function(){
+					myLog("err");
+				}
+			);
+		}
+		function readURLAsync2(){
+			var url = document.getElementById("url").value;
+			reader.readURLAsync(
+				"errorvalue",
+				new Date(), 
+			    function(userData, result){
+					logResult(result);
+				}, 
+				function(){
+					myLog("ErrorString2"+reader.getErrorString());
+				}
+			);
+			reader.readURLAsync(
+				url,
+				new Date(), 
+			    function(userData, result){
+					logResult(result);
+				}, 
+				function(){
+					myLog("ErrorString1"+reader.getErrorString());
+				}
+			);
+			
+		}
+		document.getElementById("base64").value = '';
+		function readBase64(){
+			var base64 = document.getElementById("base64").value;
+			var result = reader.readBase64(base64);
+			logResult(result);
+		}
+		function readBase64Async(){
+			var base64 = document.getElementById("base64").value;
+			var result;
+			reader.readBase64Async(
+				base64, 
+				new Date(), 
+				function(userData, result){
+					logResult(result);
+				},
+				function(){
+					myLog("err");
+				}
+			);
+		}
+	</script>
+</body>
+</html>
