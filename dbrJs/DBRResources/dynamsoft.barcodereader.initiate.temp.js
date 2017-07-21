@@ -7294,7 +7294,7 @@ dynamsoft.dbrEnv = dynamsoft.dbrEnv || {};
 // hide those setting from config
 
 dynamsoft.dbrEnv.version = '5.1.0.0404';
-dynamsoft.dbrEnv.versionInfo = 'JS version: 5.1.0.0404, Dll version: null';
+dynamsoft.dbrEnv.versionInfo = 'JS version: ' + dynamsoft.dbrEnv.version + ', Dll version: null';
 
 dynamsoft.dbrEnv.port = [18625, 18993];
 dynamsoft.dbrEnv.portSSL = [18626, 18994];
@@ -7614,6 +7614,7 @@ dynamsoft.dbrEnv.continConnInterval = 1000;
 		if(linkDcpItv != null){
 			return;
 		}
+		env.versionInfo = 'JS version: ' + env.version + ', Dll version: null';
 		dynamsoft.initOrder = dynamsoft.initOrder || [];
 		dynamsoft.initOrder.push('dbr');
 		linkDcpItv = setInterval(function(){
