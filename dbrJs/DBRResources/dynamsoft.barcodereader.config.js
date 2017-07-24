@@ -30,7 +30,7 @@ dynamsoft.dbrEnv = dynamsoft.dbrEnv || {};
 //  decompile, disassemble, or modify the productKey .                             //
 
 //////////////////////////////////////////////////////////////////////////////
-dynamsoft.dbrEnv.productKey = 'f0068MgAAAIkUZCdztvmCtdU+TWvFYiEPcOsr8rFhqNGNAWa9VLNkh0RXh2ZfdGvmxKCms7L+lvvMdPpdHWW/TGxHfj7swOw=';
+dynamsoft.dbrEnv.productKey = 't0068MgAAAHrNqr4M9FiX7/OWdNoM0bkydmt5Asq5WEcIvBjTONOcMuByeeAhNzFBOWV6o+7+fTi6Eomcc1sGFRv0cuFwWr4=';
 
 /// set resourcesPath in runtime is ok
 dynamsoft.dbrEnv.resourcesPath = "DBRResources";
